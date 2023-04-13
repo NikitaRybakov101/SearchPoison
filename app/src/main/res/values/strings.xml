@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Search Poison</string>
+    <string name="news_galaxy">News Galaxy</string>
+
+    <string name="tesla_news">Tesla news</string>
+    <string name="apple_news">Apple news</string>
+    <string name="usa_news">USA news</string>
+
+    <string name="error_network_mess">ERROR NETWORK</string>
+
+    <string name="read_more"><![CDATA[read more ->]]></string>
+    <string name="author_header">Author:\u0020</string>
+    <string name="publish_date">\u0020\u0020|\u0020\u0020publishedAt</string>
+
+    <string name="App_name_splash_screen">Search Poison</string>
+</resources>
