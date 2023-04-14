@@ -2,18 +2,17 @@ package com.example.searchpoison.ui.fragments.recycler
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.searchpoison.R
 import com.example.searchpoison.databinding.ItemRecyclerPoisonBinding
 import com.example.searchpoison.repository.dataSourse.BASE_URL_API
-import com.example.searchpoison.repository.dataSourse.ResponsePoison
+import com.example.searchpoison.repository.dataSourse.Poison
 import com.example.searchpoison.ui.fragments.SearchPoisonFragment
 import java.util.*
 
-class RecyclerPoison(private var listPoisons: ArrayList<ResponsePoison>, private val fragment: SearchPoisonFragment) : RecyclerView.Adapter<RecyclerPoison.ViewHolderItemsPoison>() , InterfaceRecycler {
+class RecyclerPoison(private var listPoisons: List<Poison>, private val callbackItem: CallbackItem) : RecyclerView.Adapter<RecyclerPoison.ViewHolderItemsPoison>() , InterfaceRecycler {
 
     companion object {
         private const val CARD_ELEVATION = 0f
@@ -24,20 +23,14 @@ class RecyclerPoison(private var listPoisons: ArrayList<ResponsePoison>, private
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderItemsPoison {
         _binding = ItemRecyclerPoisonBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        return ViewHolderItemsPoison(binding.root,binding)
+        return ViewHolderItemsPoison(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolderItemsPoison, position: Int) {
         val poison = listPoisons[position]
 
+        holder.bin(poison)
         holder.itemClicked()
-
-        holder.headerAuthor.text = poison.name
-        holder.descriptionItems.text = poison.description
-
-        Glide.with(holder.imageItems.context).load(BASE_URL_API + poison.imageUri).placeholder(R.drawable.placeholder_not_found).into(holder.imageItems)
-
-        holder.cardItems.elevation = CARD_ELEVATION
     }
 
     override fun getItemCount(): Int {
@@ -45,31 +38,40 @@ class RecyclerPoison(private var listPoisons: ArrayList<ResponsePoison>, private
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    override fun clearListNews() {
-        listPoisons.clear()
+    override fun clearList() {
+        listPoisons = listOf()
         notifyDataSetChanged()
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    override fun updateList(listNews: ArrayList<ResponsePoison>) {
-        this.listPoisons = listNews
+    override fun setNewListPoison(listPoisons: List<Poison>) {
+        this.listPoisons = listPoisons
         notifyDataSetChanged()
     }
 
-    inner class ViewHolderItemsPoison(view: View, binding: ItemRecyclerPoisonBinding) : RecyclerView.ViewHolder(view), InterfaceViewHolderNotes {
-        val headerAuthor = binding.header
-        val descriptionItems = binding.descriptionItems
-        val imageItems = binding.imageItems
-        val cardItems = binding.cardItems
+    inner class ViewHolderItemsPoison(private val bindingViewHolder: ItemRecyclerPoisonBinding) : RecyclerView.ViewHolder(binding.root), InterfaceViewHolderNotes {
 
         override fun itemClicked() {
-            cardItems.setOnClickListener {
-
+            bindingViewHolder.cardItems.setOnClickListener {
+                callbackItem.itemClicked(listPoisons[layoutPosition].id)
             }
+        }
+
+        override fun bin(poison: Poison) {
+            bindingViewHolder.header.text = poison.name
+            bindingViewHolder.descriptionItems.text = poison.description
+            bindingViewHolder.cardItems.elevation = CARD_ELEVATION
+
+            Glide
+                .with(bindingViewHolder.imageItems.context)
+                .load(BASE_URL_API + poison.imageUri)
+                .placeholder(R.drawable.placeholder_not_found)
+                .into(bindingViewHolder.imageItems)
         }
     }
 
     interface InterfaceViewHolderNotes {
         fun itemClicked()
+        fun bin(poison: Poison)
     }
 }

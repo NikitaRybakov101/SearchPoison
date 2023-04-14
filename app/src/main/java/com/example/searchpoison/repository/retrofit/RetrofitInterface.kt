@@ -1,4 +1,4 @@
-package com.example.searchpoison.repository.interfecesRepository
+package com.example.searchpoison.repository.retrofit
 
 import com.example.searchpoison.repository.dataSourse.ResponsePoison
 import retrofit2.Call
@@ -11,5 +11,5 @@ interface RetrofitInterface {
     fun getDrug(@Query("id") id : String): Call<List<ResponsePoison>>
 
     @GET("/api/ppp/index/")
-    fun getListDrug(@Query("search") search : String): Call<List<ResponsePoison>>
+    fun getListPoison(@Query("search") search : String): Call<List<ResponsePoison>>
 }

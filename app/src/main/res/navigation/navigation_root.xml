@@ -14,7 +14,7 @@
 
     <fragment
         android:id="@+id/splashScreenFragment"
-        android:name="com.example.searchpoison.ui.splashScreenFragment.SplashScreenFragment"
+        android:name="com.example.searchpoison.ui.splashScreenFragment.SplashFragment"
         android:label="SplashScreenFragment"
         tools:layout="@layout/splash_screen">
 

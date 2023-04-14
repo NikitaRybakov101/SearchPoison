@@ -1,7 +1,6 @@
-package com.example.searchpoison.repository
+package com.example.searchpoison.repository.retrofit
 
 import com.example.searchpoison.repository.dataSourse.BASE_URL_API
-import com.example.searchpoison.repository.interfecesRepository.RetrofitInterface
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

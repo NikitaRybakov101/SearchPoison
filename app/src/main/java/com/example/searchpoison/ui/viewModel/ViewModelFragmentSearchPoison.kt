@@ -1,53 +1,37 @@
 package com.example.searchpoison.ui.viewModel
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.searchpoison.repository.repositoryImpl.RepositoryImpl
 import com.example.searchpoison.repository.dataSourse.NOT_FOUND
 import com.example.searchpoison.ui.viewModel.interfacesViewModel.InterfaceViewModelFragmentSearchPoison
 import com.example.searchpoison.repository.dataSourse.LOADING
-import com.example.searchpoison.repository.RetrofitImpl
-import com.example.searchpoison.ui.viewModel.dataSourse.SendData
 import com.example.searchpoison.ui.viewModel.dataSourse.StateData
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.stateIn
 
-class ViewModelFragmentSearchPoison(private val retrofit: RetrofitImpl) : ViewModel() ,
-    InterfaceViewModelFragmentSearchPoison {
+class ViewModelFragmentSearchPoison(private val repositoryImpl: RepositoryImpl) : ViewModel() , InterfaceViewModelFragmentSearchPoison {
 
-    private val liveData = MutableLiveData<StateData>()
-    override fun getLiveData() = liveData
+    override fun getListPoisonFlow(search : String) : Flow<StateData> = flow {
 
-    private val scope = CoroutineScope(Dispatchers.IO)
+        emit(StateData.Loading(LOADING))
 
-    override fun getListNews(sendData : SendData) {
-
-        val retrofit = retrofit.getRetrofit()
-        liveData.value = StateData.Loading(LOADING)
-
-        scope.launch {
-            runCatching {
-
-                val response = retrofit.getListDrug("шанс").execute()
-
-                response
-            }.onSuccess { response ->
-
-                withContext(Dispatchers.Main) {
-                    if (response.isSuccessful && response.body() != null) {
-                        liveData.value = StateData.Success(response.body()!!)
-                    } else {
-                        liveData.value = StateData.Error(Throwable(NOT_FOUND))
-                    }
-                }
-            }.onFailure {
-                withContext(Dispatchers.Main) {
-                    liveData.value = StateData.Error(Throwable(it.message))
-                }
+        runCatching {
+            withContext(Dispatchers.IO) {
+                repositoryImpl.getListPoison(search)
             }
-        }
-    }
+        }.onSuccess { listPoison ->
 
-    override fun onCleared() {
-        super.onCleared()
-        scope.cancel()
+            if (listPoison != null) {
+                emit(StateData.Success(listPoison))
+            } else {
+                emit(StateData.Error(Throwable(NOT_FOUND)))
+            }
+        }.onFailure {
+            emit(StateData.Error(Throwable(it.message)))
+        }
     }
 }

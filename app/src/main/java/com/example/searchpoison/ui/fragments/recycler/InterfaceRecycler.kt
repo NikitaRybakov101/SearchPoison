@@ -1,8 +1,8 @@
 package com.example.searchpoison.ui.fragments.recycler
 
-import com.example.searchpoison.repository.dataSourse.ResponsePoison
+import com.example.searchpoison.repository.dataSourse.Poison
 
 interface InterfaceRecycler {
-    fun clearListNews()
-    fun updateList(listNews: ArrayList<ResponsePoison>)
+    fun clearList()
+    fun setNewListPoison(listPoisons: List<Poison>)
 }

@@ -13,8 +13,7 @@
         android:textAppearance="@style/TextNameAppSplashScreen"
         app:layout_constraintBottom_toTopOf="@+id/animationView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="Search poison"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationView"
@@ -26,6 +25,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_url="https://assets1.lottiefiles.com/packages/lf20_kbfw3xc4.json" />
+        app:lottie_url="https://assets10.lottiefiles.com/packages/lf20_poqmycwy.json" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
