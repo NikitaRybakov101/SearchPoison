@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        style="@style/Widget.MaterialComponents.Toolbar.Surface"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/green_app"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/baseline_arrow_back_24"
+        app:titleTextColor="@color/white" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="230dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageItem"
+            style="@style/ImageItemsStyle"
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/RoundedSquare"
+            tools:src="@drawable/placeholder_not_found" />
+
+        <ImageView
+            android:id="@+id/iconDetailsPoison"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="@dimen/padding_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/bookmark"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="@dimen/padding_content"
+            android:src="@drawable/baseline_star_border_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loadingProgressbar"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageItem"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_url="https://assets1.lottiefiles.com/packages/lf20_wfsunjgd.json" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_default"
+        android:layout_marginTop="@dimen/margin_very_small"
+        android:textAppearance="@style/TextHeaderStyle" />
+
+    <TextView
+        android:id="@+id/descriptionItem"
+        style="@style/TextDescriptionStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_default"
+        android:layout_marginVertical="@dimen/margin_default" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonPay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_default"
+        android:backgroundTint="@color/green_app"
+        android:text="@string/where_to_buy"
+        app:icon="@drawable/baseline_place_24"
+        app:iconGravity="textStart" />
+
+</LinearLayout>
+

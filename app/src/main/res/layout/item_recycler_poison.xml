@@ -13,13 +13,25 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imageItems"
-            style="@style/ImageItemsStyle"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:src="@drawable/placeholder_not_found"
-            app:shapeAppearanceOverlay="@style/RoundedSquare" />
+            android:layout_height="150dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageItemBack"
+                style="@style/ImageItemsStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/RoundedSquare" />
+
+            <ImageView
+                android:id="@+id/imageItem"
+                android:padding="@dimen/padding_image_items"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/placeholder_not_found" />
+        </FrameLayout>
 
         <TextView
             android:id="@+id/header"
@@ -30,7 +42,7 @@
             android:textAppearance="@style/TextHeaderStyle"/>
 
         <TextView
-            android:id="@+id/descriptionItems"
+            android:id="@+id/descriptionItem"
             style="@style/TextDescriptionStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

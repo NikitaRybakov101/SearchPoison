@@ -13,14 +13,12 @@
         <item name="android:alpha">0.5</item>
     </style>
 
-    <style name="TextNameAppSplashScreen">
+    <style name="TextNameAppSplashScreenStyle">
         <item name="android:textSize">36sp</item>
     </style>
 
     <style name="ImageItemsStyle">
-        <item name="android:gravity">center_vertical</item>
         <item name="android:padding">@dimen/padding_content</item>
-
     </style>
 
     <style name="CardItemStyle">

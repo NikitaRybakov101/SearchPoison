@@ -1,31 +1,31 @@
 package com.example.searchpoison.repository.repositoryImpl
 
 import com.example.searchpoison.repository.dataSourse.Poison
-import com.example.searchpoison.repository.dataSourse.ResponsePoison
-import com.example.searchpoison.repository.dataSourse.toPoison
 import com.example.searchpoison.repository.retrofit.RetrofitImpl
+import com.example.searchpoison.utils.toPoison
 
 class RepositoryImpl(retrofit: RetrofitImpl) : InterfaceRepository {
 
     private val retrofitInterface = retrofit.getRetrofit()
 
-    override fun getListPoison(search: String) : List<Poison>? {
-        val responseListPoison = retrofitInterface.getListPoison(search).execute()
+    override fun getListPoison(search: String, offset: Int, pageSize: Int) : List<Poison>? {
+        val responseListPoison = retrofitInterface.getListPoison(search,offset,pageSize).execute()
 
         return if (responseListPoison.isSuccessful && responseListPoison.body() != null) {
-            mapResponseListPoison(responseListPoison.body()!!)
+            checkNotNull(responseListPoison.body()).map { it.toPoison() }
         } else {
             null
         }
     }
 
-    private fun mapResponseListPoison(responseListPoison: List<ResponsePoison>): List<Poison> {
-        val listPoison = mutableListOf<Poison>()
+    override fun getPoison(idPoison: String) : Poison? {
+        val responsePoison = retrofitInterface.getPoison(idPoison).execute()
 
-        responseListPoison.forEach { responsePoison ->
-            listPoison.add(responsePoison.toPoison())
+        return if (responsePoison.isSuccessful && responsePoison.body() != null) {
+            checkNotNull(responsePoison.body()).toPoison()
+        } else {
+            null
         }
-
-        return listPoison
     }
+
 }

@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_very_small"
-        android:textAppearance="@style/TextNameAppSplashScreen"
+        android:textAppearance="@style/TextNameAppSplashScreenStyle"
         app:layout_constraintBottom_toTopOf="@+id/animationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

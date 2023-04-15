@@ -6,12 +6,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitImpl {
-    private val baseUrl = BASE_URL_API
-
     fun getRetrofit() : RetrofitInterface {
         val retrofit = Retrofit
             .Builder()
-            .baseUrl(baseUrl)
+            .baseUrl(BASE_URL_API)
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
             .build()
         return retrofit.create(RetrofitInterface::class.java)

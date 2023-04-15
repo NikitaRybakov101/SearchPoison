@@ -3,5 +3,7 @@
     <dimen name="margin_default">16dp</dimen>
     <dimen name="margin_small">12dp</dimen>
     <dimen name="margin_very_small">8dp</dimen>
+
     <dimen name="padding_content">12dp</dimen>
+    <dimen name="padding_image_items">18dp</dimen>
 </resources>
