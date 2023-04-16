@@ -19,17 +19,17 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageItemBack"
-                style="@style/ImageItemsStyle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:padding="@dimen/padding_content"
                 android:scaleType="centerCrop"
                 app:shapeAppearanceOverlay="@style/RoundedSquare" />
 
             <ImageView
                 android:id="@+id/imageItem"
-                android:padding="@dimen/padding_image_items"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:padding="@dimen/padding_image_items"
                 android:src="@drawable/placeholder_not_found" />
         </FrameLayout>
 
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_very_small"
             android:layout_marginTop="@dimen/margin_very_small"
-            android:textAppearance="@style/TextHeaderStyle"/>
+            android:textAppearance="@style/TextHeaderStyle" />
 
         <TextView
             android:id="@+id/descriptionItem"

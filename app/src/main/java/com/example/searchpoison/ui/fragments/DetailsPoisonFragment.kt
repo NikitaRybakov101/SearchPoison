@@ -68,7 +68,6 @@ class DetailsPoisonFragment : BaseViewBindingFragment<DetailsPoisonFragmentBindi
 
                 context?.showToast(stateData.error.message)
             }
-            else -> {}
         }
     }
 
@@ -106,10 +105,10 @@ class DetailsPoisonFragment : BaseViewBindingFragment<DetailsPoisonFragmentBindi
 
             if (bookmarkIsActive) {
                 bookmarkIsActive = false
-                bookmark.setImageResource(R.drawable.baseline_star_border_24)
+                bookmark.load(R.drawable.baseline_star_border_24)
             } else {
                 bookmarkIsActive = true
-                bookmark.setImageResource(R.drawable.baseline_star_24)
+                bookmark.load(R.drawable.baseline_star_border_24_active)
             }
         }
     }

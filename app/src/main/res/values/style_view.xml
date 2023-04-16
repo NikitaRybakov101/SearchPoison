@@ -5,7 +5,7 @@
     <style name="TextHeaderStyle">
         <item name="android:textSize">13sp</item>
         <item name="android:letterSpacing">0.01</item>
-        <item name="android:textColor">#000000</item>
+        <item name="android:textColor">?attr/colorOnSecondary</item>
     </style>
 
     <style name="TextDescriptionStyle">
@@ -14,17 +14,24 @@
     </style>
 
     <style name="TextNameAppSplashScreenStyle">
+        <item name="android:textColor">?attr/colorOnSecondary</item>
         <item name="android:textSize">36sp</item>
     </style>
 
-    <style name="ImageItemsStyle">
-        <item name="android:padding">@dimen/padding_content</item>
+    <style name="TextInfoStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:alpha">0.5</item>
     </style>
 
     <style name="CardItemStyle">
         <item name="cardCornerRadius">16dp</item>
         <item name="strokeColor">#EDEDED</item>
         <item name="strokeWidth">2.5dp</item>
+    </style>
+
+    <style name="ButtonStyle">
+        <item name="iconGravity">textStart</item>
+        <item name="backgroundTint">?attr/colorPrimary</item>
     </style>
 
 </resources>
