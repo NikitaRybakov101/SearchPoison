@@ -24,7 +24,6 @@ class PageSourcePoison(
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Poison> {
-
         if (searchQuery.isEmpty()) {
             return LoadResult.Page(emptyList(), prevKey = null, nextKey = null)
         }

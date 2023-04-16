@@ -1,12 +1,10 @@
 package com.example.searchpoison.repository.repositoryImpl
 
 import com.example.searchpoison.repository.dataSourse.Poison
-import com.example.searchpoison.repository.retrofit.RetrofitImpl
+import com.example.searchpoison.repository.retrofit.InterfaceRetrofit
 import com.example.searchpoison.utils.toPoison
 
-class RepositoryImpl(retrofit: RetrofitImpl) : InterfaceRepository {
-
-    private val retrofitInterface = retrofit.getRetrofit()
+class RepositoryImpl(private val retrofitInterface: InterfaceRetrofit) : InterfaceRepository {
 
     override fun getListPoison(search: String, offset: Int, pageSize: Int) : List<Poison>? {
         val responseListPoison = retrofitInterface.getListPoison(search,offset,pageSize).execute()

@@ -9,29 +9,27 @@ import com.example.searchpoison.ui.viewModel.interfacesViewModel.InterfaceViewMo
 import com.example.searchpoison.repository.dataSourse.Poison
 import com.example.searchpoison.repository.repositoryImpl.RepositoryImpl
 import com.example.searchpoison.repository.pager.PageSourcePoison
+import com.example.searchpoison.repository.repositoryImpl.InterfaceRepository
 import com.example.searchpoison.repository.retrofit.RetrofitImpl
 import com.example.searchpoison.ui.fragments.recycler.PagingAdapterRecyclerPoison.Companion.PAGE_SIZE
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 
-class ViewModelFragmentSearchPoison : ViewModel() , InterfaceViewModelFragmentSearchPoison {
+class ViewModelFragmentSearchPoison(private val repositoryImpl: InterfaceRepository) : ViewModel() , InterfaceViewModelFragmentSearchPoison {
 
-  /*  val listPoisonFlow : StateFlow<PagingData<Poison>> = Pager(PagingConfig(pageSize = MAX_PAGE_SIZE, enablePlaceholders = false)) {
-        PoisonPageSource(RepositoryImpl(RetrofitImpl()),"шанс")
-    }.flow.stateIn(viewModelScope, SharingStarted.Lazily, PagingData.empty())*/
-
-    private val _query = MutableStateFlow("")
+    private var _query = MutableStateFlow("")
     private val query: StateFlow<String> = _query.asStateFlow()
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val listPoisonFlow: StateFlow<PagingData<Poison>> = query
-        .map(::newPager)
+    override fun getPoisonsFlow(): StateFlow<PagingData<Poison>> = query
+
+        .map(::newPagerWithQuery)
         .flatMapLatest { pager -> pager.flow }
         .stateIn(viewModelScope, SharingStarted.Lazily, PagingData.empty())
 
-    private fun newPager(query: String): Pager<Int, Poison> {
+    private fun newPagerWithQuery(query: String): Pager<Int, Poison> {
         return Pager(PagingConfig(PAGE_SIZE, enablePlaceholders = false)) {
-             PageSourcePoison(RepositoryImpl(RetrofitImpl()),query)
+             PageSourcePoison(repositoryImpl,query)
         }
     }
 

@@ -1,21 +1,18 @@
 package com.example.searchpoison.ui.fragments.recycler
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.searchpoison.R
+import coil.load
 import com.example.searchpoison.databinding.ItemRecyclerPoisonBinding
 import com.example.searchpoison.repository.dataSourse.BASE_URL_API
 import com.example.searchpoison.repository.dataSourse.Poison
 
-class PagingAdapterRecyclerPoison(
-    private var listPoisons: List<Poison>,
-    private val callbackItem: CallbackItem
-
-) : PagingDataAdapter<Poison,PagingAdapterRecyclerPoison.ViewHolderItemsPoison>(ResponsePoisonDiffItemCallback) , InterfaceRecycler {
+class PagingAdapterRecyclerPoison(private val callbackItem: CallbackItem) : PagingDataAdapter<Poison,PagingAdapterRecyclerPoison.ViewHolderItemsPoison>(ResponsePoisonDiffItemCallback) {
 
     companion object {
         private const val CARD_ELEVATION = 0f
@@ -34,22 +31,6 @@ class PagingAdapterRecyclerPoison(
         holder.bind(getItem(position))
     }
 
- /*   override fun getItemCount(): Int {
-        return listPoisons.size
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    override fun clearList() {
-        listPoisons = listOf()
-        notifyDataSetChanged()
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    override fun setNewListPoison(listPoisons: List<Poison>) {
-        this.listPoisons = listPoisons
-        notifyDataSetChanged()
-    }*/
-
     private object ResponsePoisonDiffItemCallback : DiffUtil.ItemCallback<Poison>() {
         override fun areItemsTheSame(oldItem: Poison, newItem: Poison): Boolean {
             return oldItem != newItem
@@ -58,7 +39,6 @@ class PagingAdapterRecyclerPoison(
         override fun areContentsTheSame(oldItem: Poison, newItem: Poison): Boolean {
             return oldItem.name == newItem.name && oldItem.imageUri == newItem.imageUri
         }
-
     }
 
     inner class ViewHolderItemsPoison(private val bindingViewHolder: ItemRecyclerPoisonBinding) : RecyclerView.ViewHolder(binding.root), InterfaceViewHolderNotes {
@@ -69,25 +49,23 @@ class PagingAdapterRecyclerPoison(
             }
         }
 
-        override fun bind(poison: Poison?) {
+        override fun bind(poison: Poison?)  {
             poison?.let {
                 itemClicked(poison)
 
-                bindingViewHolder.header.text = poison.name
-                bindingViewHolder.descriptionItem.text = poison.description
-                bindingViewHolder.cardItems.elevation = CARD_ELEVATION
+                with(bindingViewHolder) {
+                    header.text = poison.name
+                    descriptionItem.text = poison.description
+                    cardItems.elevation = CARD_ELEVATION
 
-                Glide
-                    .with(bindingViewHolder.imageItem.context)
-                    .load(BASE_URL_API + poison.imageUri)
-                    .placeholder(R.drawable.placeholder_not_found)
-                    .into(bindingViewHolder.imageItem)
+                    imageItem.load(BASE_URL_API + poison.imageUri) {
+                        placeholder(ColorDrawable(Color.TRANSPARENT))
+                    }
 
-                Glide
-                    .with(bindingViewHolder.imageItemBack.context)
-                    .load(BASE_URL_API + poison.categories.imageUBackUrl)
-                    .placeholder(R.drawable.placeholder_not_found)
-                    .into(bindingViewHolder.imageItemBack)
+                    imageItemBack.load(BASE_URL_API + poison.categories.imageUBackUrl) {
+                        placeholder(ColorDrawable(Color.TRANSPARENT))
+                    }
+                }
             }
         }
     }

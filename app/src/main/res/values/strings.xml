@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Search Poison</string>
+
     <string name="search_poison">Поиск ядов</string>
     <string name="search_hint">введите название яда:</string>
+
     <string name="where_to_buy">ГДЕ КУПИТЬ</string>
+
+    <string name="input_name_drag">Введите название препарата:</string>
+    <string name="result_search">Результаты поиска: %1$s</string>
 </resources>

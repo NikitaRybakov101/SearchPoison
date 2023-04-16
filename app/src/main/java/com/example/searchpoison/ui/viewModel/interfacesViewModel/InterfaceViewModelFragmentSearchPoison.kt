@@ -1,10 +1,10 @@
 package com.example.searchpoison.ui.viewModel.interfacesViewModel
 
-import androidx.lifecycle.MutableLiveData
+import androidx.paging.PagingData
 import com.example.searchpoison.repository.dataSourse.Poison
-import com.example.searchpoison.ui.viewModel.dataSourse.StateData
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 
 interface InterfaceViewModelFragmentSearchPoison {
     fun setQuery(query: String)
+    fun getPoisonsFlow() : StateFlow<PagingData<Poison>>
 }

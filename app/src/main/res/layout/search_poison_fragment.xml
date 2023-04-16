@@ -3,40 +3,63 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.SearchPoisonFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
+        style="@style/Widget.MaterialComponents.Toolbar.Surface"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/green_app"
-        style="@style/Widget.MaterialComponents.Toolbar.Surface"
-        app:title="@string/search_poison"
-        app:titleTextColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/search_poison"
+        app:titleTextColor="@color/white">
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchViewPoison"
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            app:defaultQueryHint="@string/search_hint"
-            app:searchIcon="@drawable/baseline_search_24" />
+            android:layout_marginVertical="@dimen/margin_very_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:backgroundTint="#FFFFFF"
+            app:cardCornerRadius="30dp">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchViewPoison"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                app:defaultQueryHint="@string/search_hint"
+                app:searchIcon="@drawable/baseline_search_24" />
+
+        </com.google.android.material.card.MaterialCardView>
 
     </com.google.android.material.appbar.MaterialToolbar>
+
+    <TextView
+        android:id="@+id/textInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="@dimen/margin_small"
+        android:textSize="18sp"
+        android:alpha="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginEnd="@dimen/margin_very_small"
-        android:layout_marginVertical="@dimen/margin_very_small"
+        android:layout_marginTop="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/textInfo"
         tools:itemCount="5"
         tools:listitem="@layout/item_recycler_poison">
 

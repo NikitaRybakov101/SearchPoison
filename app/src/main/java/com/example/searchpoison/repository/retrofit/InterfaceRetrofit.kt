@@ -5,7 +5,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface RetrofitInterface {
+interface InterfaceRetrofit {
 
     @GET("/api/ppp/item/")
     fun getPoison(@Query("id") id : String): Call<ResponsePoisonDto>

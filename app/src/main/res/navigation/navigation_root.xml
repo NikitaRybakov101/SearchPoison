@@ -10,6 +10,9 @@
         android:name="com.example.searchpoison.ui.fragments.SearchPoisonFragment"
         android:label="fragment_first"
         tools:layout="@layout/search_poison_fragment" >
+        <action
+            android:id="@+id/action_mainSearchBinFragment_to_detailsPoisonFragment"
+            app:destination="@id/detailsPoisonFragment" />
     </fragment>
 
     <fragment
@@ -24,5 +27,10 @@
             app:popUpTo="@id/splashScreenFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/detailsPoisonFragment"
+        android:name="com.example.searchpoison.ui.fragments.DetailsPoisonFragment"
+        android:label="details_poison_fragment"
+        tools:layout="@layout/details_poison_fragment" />
 
 </navigation>
