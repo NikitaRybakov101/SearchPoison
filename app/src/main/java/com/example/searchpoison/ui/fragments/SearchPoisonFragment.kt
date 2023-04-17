@@ -94,8 +94,6 @@ class SearchPoisonFragment : BaseViewBindingFragment<SearchPoisonFragmentBinding
                 if(newText != null) {
                     viewModel.setQuery(newText.trim())
                     setTextInfo(newText.trim())
-                } else {
-                    setTextInfo("")
                 }
                 return true
             }
