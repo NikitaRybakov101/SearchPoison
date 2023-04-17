@@ -38,7 +38,6 @@ class SearchPoisonFragment : BaseViewBindingFragment<SearchPoisonFragmentBinding
     }
 
     private val viewModel : ViewModelFragmentSearchPoison by viewModel(named(VIEW_MODEL_SEARCH))
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -51,7 +50,7 @@ class SearchPoisonFragment : BaseViewBindingFragment<SearchPoisonFragmentBinding
 
     private fun listPoisonCollect() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.getPoisonsFlow()
+            viewModel.getPageFlow()
                 .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
                 .distinctUntilChanged()
                 .collectLatest(adapterPoison::submitData)
@@ -61,6 +60,8 @@ class SearchPoisonFragment : BaseViewBindingFragment<SearchPoisonFragmentBinding
     private fun initRecyclerPoisons() = with(binding) {
         recycler.layoutManager = GridLayoutManager(requireContext(),SPAN_COUNT, RecyclerView.VERTICAL,false)
         recycler.adapter = adapterPoison
+
+        adapterPoison.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
         adapterPoison.addLoadStateListener { state ->
             recycler.isVisible = state.refresh != LoadState.Loading

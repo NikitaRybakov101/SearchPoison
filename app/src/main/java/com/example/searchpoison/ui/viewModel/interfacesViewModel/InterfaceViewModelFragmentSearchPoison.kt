@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.StateFlow
 
 interface InterfaceViewModelFragmentSearchPoison {
     fun setQuery(query: String)
-    fun getPoisonsFlow() : StateFlow<PagingData<Poison>>
+    fun getPageFlow() : StateFlow<PagingData<Poison>>
 }

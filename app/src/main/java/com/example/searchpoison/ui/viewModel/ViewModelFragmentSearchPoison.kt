@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.example.searchpoison.ui.viewModel.interfacesViewModel.InterfaceViewModelFragmentSearchPoison
 import com.example.searchpoison.repository.dataSourse.Poison
 import com.example.searchpoison.repository.pager.PageSourcePoison
@@ -19,10 +20,10 @@ class ViewModelFragmentSearchPoison(private val repositoryImpl: InterfaceReposit
     private val query: StateFlow<String> = _query.asStateFlow()
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    override fun getPoisonsFlow(): StateFlow<PagingData<Poison>> = query
+    private val pageFlow : StateFlow<PagingData<Poison>> = query
 
-        .map(::newPagerWithQuery)
-        .flatMapLatest { pager -> pager.flow }
+        .map { query -> newPagerWithQuery(query) }
+        .flatMapLatest { pager -> pager.flow.cachedIn(viewModelScope) }
         .stateIn(viewModelScope, SharingStarted.Lazily, PagingData.empty())
 
     private fun newPagerWithQuery(query: String): Pager<Int, Poison> = Pager(PagingConfig(PAGE_SIZE, enablePlaceholders = false)) {
@@ -32,4 +33,6 @@ class ViewModelFragmentSearchPoison(private val repositoryImpl: InterfaceReposit
     override fun setQuery(query: String) {
         _query.tryEmit(query)
     }
+
+    override fun getPageFlow() = pageFlow
 }
