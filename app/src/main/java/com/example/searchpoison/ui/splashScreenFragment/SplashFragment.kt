@@ -20,7 +20,7 @@ class SplashFragment : BaseViewBindingFragment<SplashScreenBinding>(SplashScreen
 
         uiScope.launch {
             delay(TIME_ANIMATION_MILLIS)
-            findNavController().navigate(R.id.action_splashScreenFragment_to_MainNewsFragment)
+            findNavController().navigate(R.id.action_splashScreenFragment_to_SearchPoisonFragment)
         }
 
         initSplash()
